@@ -9,13 +9,16 @@ router.get('/', (req, res, next) => {
 	// Use our Job model to find all of the documents
 	// in the jobs collection
 	// Then send all of the jobs back as json
-	Job.find().then((jobs) => res.json(jobs));
-});
+  Job.find()
+		.populate('owner', 'email -_id')
+    .then((jobs) => res.json(jobs));
+  });
 
 // SHOW
 // GET api/jobs/:id
 router.get('/:id', handleValidateId, (req, res, next) => {
-	Job.findById(req.params.id)
+  Job.findById(req.params.id)
+    .populate('owner')
 		.then(handleRecordExists)
 		.then((job) => {
 			res.json(job);
