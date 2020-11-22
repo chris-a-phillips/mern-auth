@@ -1,7 +1,12 @@
 const express = require('express');
 const Job = require('../models/Job');
-const {	handleValidateId,	handleRecordExists } = require('../middleware/custom_errors');
 const router = express.Router();
+const {
+	handleValidateId,
+	handleRecordExists,
+	handleValidateOwnership,
+} = require('../middleware/custom_errors');
+const { requireToken } = require('../middleware/auth');
 
 // INDEX
 // GET api/jobs
@@ -28,7 +33,7 @@ router.get('/:id', handleValidateId, (req, res, next) => {
 
 // CREATE
 // POST api/jobs
-router.post('/', (req, res, next) => {
+router.post('/', requireToken, (req, res, next) => {
 	Job.create(req.body)
 		.then((job) => res.status(201).json(job))
 		.catch(next);
@@ -41,6 +46,7 @@ router.put('/:id', handleValidateId, (req, res, next) => {
 		new: true,
 	})
 		.then(handleRecordExists)
+		.then((job) => handleValidateOwnership(req, job))
 		.then((job) => {
 			res.json(job);
 		})
@@ -54,6 +60,7 @@ router.delete('/:id', handleValidateId, (req, res, next) => {
 		_id: req.params.id,
 	})
 		.then(handleRecordExists)
+		.then((job) => handleValidateOwnership(req, job))
 		.then((job) => {
 			res.sendStatus(204);
 		})
