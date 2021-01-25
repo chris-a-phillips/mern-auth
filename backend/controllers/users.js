@@ -5,6 +5,13 @@ const router = express.Router();
 const bcrypt = require('bcrypt')
 const { createUserToken } = require('../middleware/auth');
 
+// INDEX
+// GET api/users
+router.get('/users', (req, res, next) => {
+  User.find()
+		// .populate('owner', 'email -_id')
+    .then((users) => res.json(users));
+  });
 
 // SIGN UP
 // POST /api/signup
