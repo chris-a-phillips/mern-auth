@@ -2,20 +2,21 @@ import React, { useContext } from 'react';
 import { TokenContext } from '../TokenContext';
 
 const Page = () => {
-	const job = useContext(TokenContext);
+    const jobs = useContext(TokenContext);
+    console.log('jobs:', jobs)
 
 	return (
 		<div>
-			{job
-				? job.map((stuff) => {
+			{jobs
+				? jobs.map((job) => {
 						return (
-							<div>
-								{stuff.title}
-								{stuff.description}
-								{stuff.owner.id}
+							<div key={job._id}>
+                                <p>{job.title}</p>
+                                <p>{job.description}</p>
+                                <p>{job.owner._id}</p>
 							</div>
 						);
-				  })
+				})
 				: null}
 		</div>
 	);

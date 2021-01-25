@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema(
 		},
 	},
 	{
-    timestamps: true,
-    // id: false,
+		timestamps: true,
+		// id: false,
 		toJSON: {
 			virtuals: true,
 			// ret is the returned Mongoose document

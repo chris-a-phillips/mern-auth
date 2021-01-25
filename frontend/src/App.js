@@ -6,7 +6,7 @@ import Page from './components/Page';
 import { TokenContext } from './TokenContext';
 
 function App() {
-	const [job, setJob] = useState('');
+	const [jobs, setJobs] = useState('');
 
 	useEffect(() => {
     const url = 'http://localhost:4000/api/jobs/';
@@ -16,12 +16,13 @@ function App() {
       url: url,
     })
     .then((res) =>
-      console.log(res))
+      setJobs(res.data)
+      )
 	}, []);
 
 	return (
 		<div className='App'>
-			<TokenContext.Provider value={job}>
+			<TokenContext.Provider value={jobs}>
 				<Page />
 			</TokenContext.Provider>
 		</div>
