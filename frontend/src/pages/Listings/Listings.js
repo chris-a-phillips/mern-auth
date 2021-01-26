@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { Route, Switch } from 'react-router-dom';
+import { JobLink, ListingContainer, ListingsWrapper } from './SCListings';
+import JobListPage from '../../components/JobListPage/JobListPage';
+import JobShowPage from '../../components/JobShowPage/JobShowPage';
 
 const Listings = () => {
-    const [jobs, setJobs] = useState('')
-
-
+	const [data, setData] = useState();
+	const [id, setId] = useState();
 
     useEffect(() => {
         const url = 'http://localhost:4000/api/jobs/';
@@ -15,29 +18,33 @@ const Listings = () => {
         })
         .then((res) => {
             console.log(res)
-            setJobs(res.data)
+            setData(res.data)
         })
         
     }, [])
 
-    if (!jobs) {
+    if (!data) {
         return null
     }
 
 
     return (
-        <div>
-            {jobs.map((job) => {
-                return (
-                    <div key={job._id}>
-                        <p>{job.title}</p>
-                        <p>{job.description}</p>
-                        <p>{job.owner.email}</p>
-                    </div>
-                )
-            })}
-        </div>
-    );
+		<ListingsWrapper>
+			<Switch>
+				<Route exact path={'/listings'}>
+					<JobListPage data={data} setId={setId} />
+				</Route>
+                <Route>
+					<JobShowPage
+						data={data}
+						// exact
+						// path={`/listings/${id}`}
+						id={id}
+					/>
+				</Route>
+			</Switch>
+		</ListingsWrapper>
+	);
 };
 
 export default Listings;

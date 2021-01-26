@@ -47,7 +47,6 @@ function App() {
 							/>
 							<Route
 								path='/listings'
-								exact
 								render={() => <Listings test={test} />}
 							/>
 						</Switch>
