@@ -9,7 +9,7 @@ const Profile = () => {
 	useEffect(() => {
 		// user condition is for testing purposes
 		if (user && (user.username !== 'spongebob')) {
-			const personalURL = 'http://localhost:8000/users/me/';
+			const personalURL = 'http://localhost:4000/api/';
 			axios({
 				method: 'get',
 				url: personalURL,

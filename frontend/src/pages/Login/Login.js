@@ -39,8 +39,8 @@ const Login = () => {
 	};
 
 	const handleSubmit = (event) => {
-		const signUpURL = 'http://localhost:8000/users/';
-		const signInURL = 'http://localhost:8000/token/login/';
+		const signUpURL = 'http://localhost:4000/api/signup';
+		const signInURL = 'http://localhost:4000/api/signin';
 
 		if (!newUser) {
 			event.preventDefault();
@@ -50,10 +50,11 @@ const Login = () => {
 				data: credentials,
 			})
 				.then((res) => {
-					if (res.data.auth_token) {
+					console.log(res)
+					if (res.data.token) {
 						setUser({
 							email: credentials.email,
-							token: res.data.auth_token,
+							token: res.data.token,
 						});
 						setRedirect(true);
 					} else {
