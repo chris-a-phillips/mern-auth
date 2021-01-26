@@ -54,7 +54,7 @@ const Header = () => {
 			<NavBar>
 				<NavLink to='/'>Landing Page</NavLink>
 				<NavLink to='/dashboard'>Dashboard</NavLink>
-				<NavLink to='/profile'>Profile</NavLink>
+				<NavLink to='/postjob'>Post Job</NavLink>
 				<NavLink to='/listings'>Listings</NavLink>
 			</NavBar>
 		</HeaderWrapper>

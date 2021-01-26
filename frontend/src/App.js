@@ -5,7 +5,7 @@ import Landing from './pages/Landing/Landing';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
+import PostJob from './pages/PostJob/PostJob';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { UserContext } from './utils/UserContext';
@@ -41,9 +41,9 @@ function App() {
 								render={() => <Login test={test} />}
 							/>
 							<Route
-								path='/profile'
+								path='/postjob'
 								exact
-								render={() => <Profile test={test} />}
+								render={() => <PostJob test={test} />}
 							/>
 							<Route
 								path='/listings'

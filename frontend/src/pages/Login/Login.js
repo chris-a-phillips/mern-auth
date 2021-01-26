@@ -80,7 +80,7 @@ const Login = () => {
 	};
 
 	if (redirect) {
-		return <Redirect to='/profile' />;
+		return <Redirect to='/dashboard' />;
 	}
 
 	return (
